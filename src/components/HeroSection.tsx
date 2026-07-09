@@ -129,7 +129,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
         </div>
 
         <div className="relative min-h-[460px] select-none lg:col-span-6 lg:min-h-[640px]">
-          <div className="absolute bottom-[-54px] left-1/2 h-[430px] w-[430px] -translate-x-1/2 sm:h-[520px] sm:w-[520px] lg:bottom-[-86px] lg:left-auto lg:right-[-34px] lg:h-[585px] lg:w-[585px] lg:translate-x-0 xl:right-[48px] xl:h-[620px] xl:w-[620px]">
+          <div className="absolute bottom-[-54px] left-1/2 h-[430px] w-[430px] -translate-x-1/2 sm:h-[520px] sm:w-[520px] lg:bottom-[-86px] lg:left-auto lg:right-[-34px] lg:h-[585px] lg:w-[585px] lg:translate-x-0 xl:right-[-16px] xl:h-[620px] xl:w-[620px]">
             <div className="absolute bottom-0 right-0 h-[88%] w-[88%] rounded-full bg-[#FF3F00] shadow-[0_24px_80px_rgba(255,63,0,0.22)]" />
 
             <div className="absolute bottom-[5%] right-[-4%] z-10 h-[78%] w-[112%] sm:h-[80%] sm:w-[114%] lg:right-[-8%] lg:h-[82%] lg:w-[118%]">
