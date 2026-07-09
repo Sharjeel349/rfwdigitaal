@@ -125,7 +125,7 @@ export default function ServiceSection({ content }: ServiceSectionProps) {
             </a>
           </div>
 
-          <div className="flex justify-center lg:justify-end lg:pt-[22px]">
+          <div className="flex justify-center lg:justify-end lg:pt-[22px] xl:translate-x-[72px]">
             <div className="relative h-[398px] w-full max-w-[440px] overflow-hidden rounded-[20px] bg-[#FAF6F0] xl:h-[508px] xl:max-w-[559px]">
               <Image
                 src="/images/photos2.png"
