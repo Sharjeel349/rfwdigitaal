@@ -193,7 +193,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
               </span>
             </div>
 
-            <div className="hover-lift absolute left-[-10%] top-[56%] z-20 hidden items-center gap-4 rounded-full bg-white px-6 py-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] sm:flex lg:left-[-36%] lg:top-[47%] xl:left-[-28%]">
+            <div className="hover-lift absolute left-[-10%] top-[56%] z-20 hidden items-center gap-4 rounded-full bg-white px-6 py-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] sm:flex lg:left-[-36%] lg:top-[47%] xl:left-[-42%]">
               <div className="flex -space-x-3">
                 <span className="h-[50px] w-[50px] rounded-full border-3 border-white bg-[#C4C4C4]" />
                 <span className="h-[50px] w-[50px] rounded-full border-3 border-white bg-[#C4C4C4]" />
