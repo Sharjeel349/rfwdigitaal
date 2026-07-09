@@ -22,7 +22,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
           priority={true}
         />
       </div>
-      <div className="relative z-10 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-10 px-6 sm:px-10 lg:grid-cols-12 lg:px-[72px]">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-10 px-6 sm:px-10 lg:grid-cols-12 lg:px-[72px] xl:max-w-none xl:px-[86px]">
         <div className="relative z-20 flex flex-col items-start text-left lg:col-span-6">
           <span className="mb-7 inline-block rounded-[28.8px] bg-[#FF3F00] px-[19.2px] py-[4.8px] text-[16.8px] font-bold uppercase tracking-[0.13em] leading-[1.5] text-white shadow-sm shadow-brand-orange/20">
             {content.badge}
@@ -129,7 +129,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
         </div>
 
         <div className="relative min-h-[460px] select-none lg:col-span-6 lg:min-h-[640px]">
-          <div className="absolute bottom-[-54px] left-1/2 h-[430px] w-[430px] -translate-x-1/2 sm:h-[520px] sm:w-[520px] lg:bottom-[-86px] lg:left-auto lg:right-[-34px] lg:h-[585px] lg:w-[585px] lg:translate-x-0 xl:right-[-18px] xl:h-[620px] xl:w-[620px]">
+          <div className="absolute bottom-[-54px] left-1/2 h-[430px] w-[430px] -translate-x-1/2 sm:h-[520px] sm:w-[520px] lg:bottom-[-86px] lg:left-auto lg:right-[-34px] lg:h-[585px] lg:w-[585px] lg:translate-x-0 xl:right-[48px] xl:h-[620px] xl:w-[620px]">
             <div className="absolute bottom-0 right-0 h-[88%] w-[88%] rounded-full bg-[#FF3F00] shadow-[0_24px_80px_rgba(255,63,0,0.22)]" />
 
             <div className="absolute bottom-[5%] right-[-4%] z-10 h-[78%] w-[112%] sm:h-[80%] sm:w-[114%] lg:right-[-8%] lg:h-[82%] lg:w-[118%]">

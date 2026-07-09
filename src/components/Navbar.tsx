@@ -27,7 +27,7 @@ export default function Navbar({ links }: NavbarProps) {
           : "bg-transparent py-6"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 xl:max-w-none xl:px-[86px]">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-1 group">
           <span className="font-display font-black text-xl tracking-wider text-charcoal">
