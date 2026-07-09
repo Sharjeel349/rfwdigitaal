@@ -43,7 +43,7 @@ export default function TestimonialsSection() {
 
   return (
     <section className="py-24 bg-[#FAF6F0] overflow-hidden select-none">
-      <div className="max-w-7xl mx-auto px-6 text-center">
+      <div className="mx-auto w-full max-w-[1740px] px-6 text-center sm:px-8">
         
         {/* Category Pill */}
         <div className="inline-flex rounded-[29px] bg-[#FF3F00] px-[19.3px] py-[4.8px] text-[16.9px] font-bold uppercase tracking-[0.13em] leading-[1.5] text-white shadow-sm shadow-brand-orange/20 mb-10">
@@ -51,7 +51,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Testimonials Deck */}
-        <div className="flex items-center justify-center relative min-h-[460px] w-full max-w-[1365px] mx-auto px-4 mt-8">
+        <div className="flex items-center justify-center relative min-h-[460px] w-full max-w-[1547px] mx-auto px-4 mt-8">
           {testimonials.map((item, idx) => {
             const isActive = idx === activeIdx;
             const isLeft = idx === (activeIdx - 1 + testimonials.length) % testimonials.length;

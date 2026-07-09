@@ -87,8 +87,8 @@ export default function ServiceSection({ content }: ServiceSectionProps) {
 
   return (
     <section id="services" className="bg-white pb-0 pt-20 select-none">
-      <div className="mx-auto max-w-[1365px] px-8 sm:px-12 xl:px-[70px]">
-        <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[minmax(0,735px)_440px] lg:gap-[58px]">
+      <div className="mx-auto w-full max-w-[1365px] px-8 sm:px-12 lg:max-w-none lg:px-[86px]">
+        <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[minmax(0,843px)_minmax(360px,559px)] lg:gap-[72px]">
           <div className="flex min-w-0 flex-col items-start text-left">
             <span className="mb-7 inline-block rounded-[27.4px] bg-[#FF3F00] px-[18.2px] py-[4.6px] text-[16px] font-bold uppercase tracking-[0.13em] leading-[1.5] text-white shadow-sm shadow-brand-orange/20">
               {content.sectionBadge}
@@ -126,14 +126,14 @@ export default function ServiceSection({ content }: ServiceSectionProps) {
           </div>
 
           <div className="flex justify-center lg:justify-end lg:pt-[22px]">
-            <div className="relative h-[398px] w-full max-w-[440px] overflow-hidden rounded-[20px] bg-[#FAF6F0]">
+            <div className="relative h-[398px] w-full max-w-[440px] overflow-hidden rounded-[20px] bg-[#FAF6F0] xl:h-[508px] xl:max-w-[559px]">
               <Image
                 src="/images/photos2.png"
                 alt="Marketing dashboard with urban creative campaign talent"
                 width={1860}
                 height={2493}
-                sizes="(max-width: 1024px) 90vw, 520px"
-                className="absolute left-1/2 top-[-160px] h-[620px] w-auto -translate-x-1/2 object-contain"
+                sizes="(max-width: 1024px) 90vw, 559px"
+                className="absolute left-1/2 top-[-160px] h-[620px] w-auto -translate-x-1/2 object-contain xl:top-[-210px] xl:h-[790px]"
                 priority
               />
             </div>

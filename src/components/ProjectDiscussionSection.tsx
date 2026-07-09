@@ -1,8 +1,8 @@
 export default function ProjectDiscussionSection() {
   return (
-    <section className="py-12 bg-[#FAF6F0] px-6 select-none">
-      <div className="max-w-7xl mx-auto">
-        <div className="relative rounded-[48.3px] overflow-hidden bg-gradient-to-r from-[rgba(255,63,0,0.3)] to-[rgba(239,183,168,0.3)] px-8 sm:px-16 py-12 lg:py-20 flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[280px] z-10">
+    <section id="contact" className="py-12 bg-[#FAF6F0] px-0 sm:px-6 select-none">
+      <div className="mx-auto w-full max-w-[1740px]">
+        <div className="relative rounded-[48.3px] overflow-hidden bg-gradient-to-r from-[rgba(255,63,0,0.3)] to-[rgba(239,183,168,0.3)] px-8 sm:px-16 py-12 lg:py-20 xl:px-[164px] flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[280px] z-10">
           
           {/* Left Panel - Copy Content */}
           <div className="flex-1 flex flex-col items-start text-left z-10 max-w-xl">

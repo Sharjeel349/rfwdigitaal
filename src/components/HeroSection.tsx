@@ -33,8 +33,8 @@ export default function HeroSection({ content }: HeroSectionProps) {
             <span className="italic text-brand-orange">
               {content.italicizedWord}
             </span>{" "}
-            with our all-in-one platform for Urban Creativity and Digital
-            Innovation.
+            with our <span className="whitespace-nowrap">all-in-one</span>{" "}
+            platform for Urban Creativity and Digital Innovation.
           </h1>
 
           <p className="mb-8 max-w-[550px] text-[19.2px] font-normal leading-[1.5] text-black opacity-80">

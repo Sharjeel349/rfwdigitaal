@@ -17,7 +17,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-white text-black select-none border-t border-[#FAF6F0]">
-      <div className="max-w-7xl mx-auto px-6 pt-16 pb-12">
+      <div className="mx-auto w-full max-w-7xl px-6 pt-16 pb-12 lg:max-w-none lg:px-[86px]">
         
         {/* Upper Footer Columns */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12">
