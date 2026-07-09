@@ -46,9 +46,7 @@ export default function Navbar({ links }: NavbarProps) {
                 href={link.href}
                 className={`font-sans text-[14px] ${
                   isActive ? "font-black text-brand-orange" : "font-bold text-black hover:text-brand-orange"
-                } tracking-[0.13em] uppercase transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[1.5px] after:bg-brand-orange after:transition-transform after:duration-300 ${
-                  isActive ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100"
-                }`}
+                } tracking-[0.13em] uppercase transition-colors`}
               >
                 {link.label}
               </a>
