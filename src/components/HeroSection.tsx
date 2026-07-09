@@ -23,7 +23,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
         />
       </div>
       <div className="relative z-10 mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-10 px-6 sm:px-10 lg:grid-cols-12 lg:px-[72px] xl:max-w-none xl:px-[86px]">
-        <div className="relative z-30 flex flex-col items-start text-left lg:col-span-6">
+        <div className="relative z-20 flex flex-col items-start text-left lg:col-span-6">
           <span className="mb-7 inline-block rounded-[28.8px] bg-[#FF3F00] px-[19.2px] py-[4.8px] text-[16.8px] font-bold uppercase tracking-[0.13em] leading-[1.5] text-white shadow-sm shadow-brand-orange/20">
             {content.badge}
           </span>
@@ -193,7 +193,7 @@ export default function HeroSection({ content }: HeroSectionProps) {
               </span>
             </div>
 
-            <div className="hover-lift absolute left-[-10%] top-[56%] z-20 hidden items-center gap-4 rounded-full bg-white px-6 py-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] sm:flex lg:left-[-36%] lg:top-[47%] xl:left-[-38%] xl:top-[28%]">
+            <div className="hover-lift absolute left-[-10%] top-[56%] z-20 hidden items-center gap-4 rounded-full bg-white px-6 py-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] sm:flex lg:left-[-36%] lg:top-[47%] xl:left-[-42%]">
               <div className="flex -space-x-3">
                 <span className="h-[50px] w-[50px] rounded-full border-3 border-white bg-[#C4C4C4]" />
                 <span className="h-[50px] w-[50px] rounded-full border-3 border-white bg-[#C4C4C4]" />
