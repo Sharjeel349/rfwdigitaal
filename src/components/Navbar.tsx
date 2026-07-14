@@ -32,7 +32,7 @@ export default function Navbar({ links }: NavbarProps) {
       return;
     }
 
-    const sections = ["services", "culture"];
+    const sections = ["culture"];
     const observers = sections.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -81,9 +81,9 @@ export default function Navbar({ links }: NavbarProps) {
           {links.map((link) => {
             const isActive =
               (pathname === "/work" && link.label === "WORK") ||
+              (pathname === "/services" && link.label === "SERVICES") ||
               (pathname === "/contact" && link.label === "CONTACT") ||
               (pathname === "/" && (
-                (activeSection === "services" && link.label === "SERVICES") ||
                 (activeSection === "culture" && link.label === "CULTURE") ||
                 (activeSection === "" && link.label === "HOME")
               ));
@@ -160,9 +160,9 @@ export default function Navbar({ links }: NavbarProps) {
           {links.map((link) => {
             const isActive =
               (pathname === "/work" && link.label === "WORK") ||
+              (pathname === "/services" && link.label === "SERVICES") ||
               (pathname === "/contact" && link.label === "CONTACT") ||
               (pathname === "/" && (
-                (activeSection === "services" && link.label === "SERVICES") ||
                 (activeSection === "culture" && link.label === "CULTURE") ||
                 (activeSection === "" && link.label === "HOME")
               ));

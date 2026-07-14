@@ -76,7 +76,7 @@ export default function Footer() {
               <Link href="/#culture" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
                 Culture
               </Link>
-              <Link href="/#services" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
+              <Link href="/services" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
                 Services
               </Link>
               <Link href="/contact" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">

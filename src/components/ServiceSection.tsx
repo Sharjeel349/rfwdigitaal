@@ -103,7 +103,7 @@ export default function ServiceSection({ content }: ServiceSectionProps) {
             </p>
 
             <a
-              href="#contact"
+              href="/services"
               className="group flex items-center gap-[9.1px] text-[16px] font-bold uppercase tracking-[0.13em] text-black transition-colors duration-300 hover:text-brand-orange"
             >
               LEARN MORE

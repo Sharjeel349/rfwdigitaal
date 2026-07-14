@@ -67,7 +67,7 @@ export default function QuoteSection({
           {/* View More Button Right */}
           <div className="lg:col-span-2 flex lg:justify-end shrink-0">
             <a
-              href="#work"
+              href="/work"
               className="flex items-center gap-2.5 text-[14px] font-sans font-bold tracking-[0.13em] text-black uppercase transition-colors duration-300 hover:text-brand-orange group"
             >
               VIEW MORE

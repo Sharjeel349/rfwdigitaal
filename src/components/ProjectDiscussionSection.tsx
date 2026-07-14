@@ -13,7 +13,7 @@ export default function ProjectDiscussionSection() {
               The essential to combine empathy, creativity and rationality to meet user needs and business success
             </p>
             <a
-              href="#contact"
+              href="/contact"
               className="group inline-flex items-center justify-center gap-[29px] rounded-[58px] bg-black pl-[29px] pr-[9.7px] py-[9.7px] h-[67.7px] text-[16.9px] font-bold uppercase tracking-[0.13em] text-white shadow-md transition-all duration-300 hover:bg-brand-orange"
             >
               GET STARTED
