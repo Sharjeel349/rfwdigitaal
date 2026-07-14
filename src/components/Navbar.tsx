@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { NavLink } from "@/data/content";
 
 interface NavbarProps {
@@ -8,6 +10,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ links }: NavbarProps) {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -29,19 +32,21 @@ export default function Navbar({ links }: NavbarProps) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 xl:max-w-none xl:px-[86px]">
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-1 group">
+        <Link href="/" className="flex items-center gap-1 group">
           <span className="font-display font-black text-xl tracking-wider text-charcoal">
             MAVERICK
           </span>
           <span className="h-2 w-2 rounded-full bg-brand-orange animate-pulse"></span>
-        </a>
+        </Link>
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex items-center gap-8">
           {links.map((link) => {
-            const isActive = link.label === "HOME";
+            const isActive =
+              (pathname === "/work" && link.label === "WORK") ||
+              (pathname !== "/work" && link.label === "HOME");
             return (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 className={`font-sans text-[14px] ${
@@ -49,15 +54,15 @@ export default function Navbar({ links }: NavbarProps) {
                 } tracking-[0.13em] uppercase transition-colors`}
               >
                 {link.label}
-              </a>
+              </Link>
             );
           })}
         </nav>
 
         {/* Action Button */}
         <div className="hidden md:flex items-center">
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="group flex items-center gap-8 text-[14px] font-sans font-bold tracking-[0.13em] text-black uppercase transition-colors duration-300 hover:text-brand-orange"
           >
             GET STARTED
@@ -76,7 +81,7 @@ export default function Navbar({ links }: NavbarProps) {
                 />
               </svg>
             </span>
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -111,19 +116,19 @@ export default function Navbar({ links }: NavbarProps) {
       >
         <nav className="flex flex-col items-center gap-6">
           {links.map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               onClick={() => setIsOpen(false)}
               className="font-display font-semibold text-lg tracking-widest text-charcoal hover:text-brand-orange transition-colors"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           onClick={() => setIsOpen(false)}
           className="flex items-center gap-2 px-6 py-3 rounded-full bg-brand-orange text-white text-xs font-display font-semibold tracking-wider hover:bg-charcoal transition-all duration-300 shadow-lg"
         >
@@ -141,7 +146,7 @@ export default function Navbar({ links }: NavbarProps) {
               d="M14 5l7 7m0 0l-7 7m7-7H3"
             />
           </svg>
-        </a>
+        </Link>
       </div>
     </header>
   );
