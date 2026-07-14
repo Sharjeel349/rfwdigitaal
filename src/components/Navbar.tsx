@@ -13,14 +13,51 @@ export default function Navbar({ links }: NavbarProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      if (pathname === "/" && window.scrollY < 100) {
+        setActiveSection("");
+      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+
+    const sections = ["services", "culture"];
+    const observers = sections.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveSection(id);
+            }
+          });
+        },
+        { threshold: 0.3, rootMargin: "-10% 0px -40% 0px" }
+      );
+
+      observer.observe(el);
+      return { observer, el };
+    });
+
+    return () => {
+      observers.forEach((obs) => {
+        if (obs) obs.observer.unobserve(obs.el);
+      });
+    };
+  }, [pathname]);
 
   return (
     <header
@@ -44,7 +81,12 @@ export default function Navbar({ links }: NavbarProps) {
           {links.map((link) => {
             const isActive =
               (pathname === "/work" && link.label === "WORK") ||
-              (pathname !== "/work" && link.label === "HOME");
+              (pathname === "/contact" && link.label === "CONTACT") ||
+              (pathname === "/" && (
+                (activeSection === "services" && link.label === "SERVICES") ||
+                (activeSection === "culture" && link.label === "CULTURE") ||
+                (activeSection === "" && link.label === "HOME")
+              ));
             return (
               <Link
                 key={link.label}
@@ -62,7 +104,7 @@ export default function Navbar({ links }: NavbarProps) {
         {/* Action Button */}
         <div className="hidden md:flex items-center">
           <Link
-            href="/#contact"
+            href="/contact"
             className="group flex items-center gap-8 text-[14px] font-sans font-bold tracking-[0.13em] text-black uppercase transition-colors duration-300 hover:text-brand-orange"
           >
             GET STARTED
@@ -115,20 +157,32 @@ export default function Navbar({ links }: NavbarProps) {
         }`}
       >
         <nav className="flex flex-col items-center gap-6">
-          {links.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="font-display font-semibold text-lg tracking-widest text-charcoal hover:text-brand-orange transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const isActive =
+              (pathname === "/work" && link.label === "WORK") ||
+              (pathname === "/contact" && link.label === "CONTACT") ||
+              (pathname === "/" && (
+                (activeSection === "services" && link.label === "SERVICES") ||
+                (activeSection === "culture" && link.label === "CULTURE") ||
+                (activeSection === "" && link.label === "HOME")
+              ));
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`font-display font-semibold text-lg tracking-widest transition-colors ${
+                  isActive ? "text-brand-orange font-black" : "text-charcoal hover:text-brand-orange font-bold"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <Link
-          href="/#contact"
+          href="/contact"
           onClick={() => setIsOpen(false)}
           className="flex items-center gap-2 px-6 py-3 rounded-full bg-brand-orange text-white text-xs font-display font-semibold tracking-wider hover:bg-charcoal transition-all duration-300 shadow-lg"
         >

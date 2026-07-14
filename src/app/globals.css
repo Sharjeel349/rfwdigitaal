@@ -83,6 +83,7 @@ body {
     opacity: 0.3;
     transform: rotateY(-70deg) scale(0.9) rotate(4deg);
   }
+
   100% {
     opacity: 1;
     transform: rotateY(0deg) scale(1) rotate(0deg);
@@ -93,4 +94,24 @@ body {
   backface-visibility: visible;
   transform-style: preserve-3d;
   animation: cardSwap 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Infinite Marquee horizontal ticker scroll (news style) */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

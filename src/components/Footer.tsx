@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Link from "next/link";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -69,18 +70,18 @@ export default function Footer() {
               Company
             </h4>
             <nav className="flex flex-col gap-4">
-              <a href="#work" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
+              <Link href="/work" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
                 Work
-              </a>
-              <a href="#culture" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
+              </Link>
+              <Link href="/#culture" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
                 Culture
-              </a>
-              <a href="#services" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
+              </Link>
+              <Link href="/#services" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
                 Services
-              </a>
-              <a href="#contact" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
+              </Link>
+              <Link href="/contact" className="text-xs font-sans font-semibold text-zinc-500 hover:text-black transition-colors tracking-widest uppercase">
                 Contact
-              </a>
+              </Link>
             </nav>
           </div>
 

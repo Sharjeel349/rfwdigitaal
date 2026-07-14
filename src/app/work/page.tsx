@@ -111,7 +111,7 @@ export default function WorkPage() {
         {/* Brand Identity Showcase Section */}
         <section id="brand-identity" className="relative py-24 z-10 bg-white">
           <div className="mx-auto w-full max-w-[1440px] px-6 sm:px-10 lg:px-[86px] xl:max-w-none flex flex-col items-start gap-12">
-            
+
             {/* Header Badge */}
             <div className="w-full flex justify-between items-center">
               <span className="inline-flex items-center justify-center rounded-[27.4px] bg-[#FF3F00] px-[18.2px] py-[6px] text-[15.9px] font-bold uppercase tracking-[0.13em] leading-[1.5] text-white shadow-sm shadow-brand-orange/20">
@@ -121,9 +121,9 @@ export default function WorkPage() {
 
             {/* Showcase Grid with Slider Arrows */}
             <div className="w-full flex items-center justify-between gap-2 md:gap-8">
-              
+
               {/* Left Arrow Button */}
-              <button 
+              <button
                 onClick={handlePrev}
                 aria-label="Previous portfolio item"
                 className="flex items-center justify-center w-[45.6px] h-[45.6px] shrink-0 rounded-full border-[2.28px] border-[#FF3F00] text-black hover:bg-[#FF3F00] hover:text-white transition-colors duration-300 z-10"
@@ -135,7 +135,7 @@ export default function WorkPage() {
 
               {/* Mockup Showcase Cards */}
               <div className="w-full flex items-center justify-center gap-6 lg:gap-8 perspective-container">
-                
+
                 {/* Logo Design 3 (Left Mockup - hidden on mobile) */}
                 <div key={`left-${leftIndex}`} className="hover-lift animate-card-swap hidden md:block md:w-[31%] max-w-[433px] bg-[#F7F5F0] rounded-2xl overflow-hidden border border-zinc-200/50 shadow-md">
                   <div className="relative w-full aspect-[433/303]">
@@ -178,7 +178,7 @@ export default function WorkPage() {
               </div>
 
               {/* Right Arrow Button */}
-              <button 
+              <button
                 onClick={handleNext}
                 aria-label="Next portfolio item"
                 className="flex items-center justify-center w-[45.6px] h-[45.6px] shrink-0 rounded-full border-[2.28px] border-[#FF3F00] text-black hover:bg-[#FF3F00] hover:text-white transition-colors duration-300 z-10"
