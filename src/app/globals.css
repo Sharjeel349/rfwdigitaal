@@ -73,27 +73,20 @@ body {
   background: #C4B9AC;
 }
 
-.perspective-container {
-  perspective: 1200px;
-}
-
-/* Card Swap animation for carousel items (3D Spring Spin) */
-@keyframes cardSwap {
+/* Card Slide animation for carousel items (Smooth slide and fade) */
+@keyframes cardSlideIn {
   0% {
-    opacity: 0.3;
-    transform: rotateY(-70deg) scale(0.9) rotate(4deg);
+    opacity: 0.5;
+    transform: translateX(40px) scale(0.96);
   }
-
   100% {
     opacity: 1;
-    transform: rotateY(0deg) scale(1) rotate(0deg);
+    transform: translateX(0) scale(1);
   }
 }
 
-.animate-card-swap {
-  backface-visibility: visible;
-  transform-style: preserve-3d;
-  animation: cardSwap 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.animate-card-slide {
+  animation: cardSlideIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Infinite Marquee horizontal ticker scroll (news style) */

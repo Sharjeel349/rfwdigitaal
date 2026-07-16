@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 
 type PortfolioItem = { src: string; alt: string };
@@ -67,10 +68,18 @@ interface CarouselSectionProps {
   label: string;
   anchorId: string;
   items: PortfolioItem[];
+  noFrame?: boolean;
 }
 
-function CarouselSection({ label, anchorId, items }: CarouselSectionProps) {
+function CarouselSection({ label, anchorId, items, noFrame = false }: CarouselSectionProps) {
   const [activeIndex, setActiveIndex] = useState(Math.min(1, items.length - 1));
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handlePrev = () =>
     setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
@@ -80,6 +89,49 @@ function CarouselSection({ label, anchorId, items }: CarouselSectionProps) {
   const leftIndex = (activeIndex - 1 + items.length) % items.length;
   const middleIndex = activeIndex;
   const rightIndex = (activeIndex + 1) % items.length;
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const handleLightboxPrev = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setLightboxIndex((prev) => (prev - 1 + items.length) % items.length);
+  };
+
+  const handleLightboxNext = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setLightboxIndex((prev) => (prev + 1) % items.length);
+  };
+
+  // Keyboard navigation for Lightbox
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") handleLightboxPrev();
+      if (e.key === "ArrowRight") handleLightboxNext();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxOpen, lightboxIndex]);
+
+  // Lock scroll background
+  useEffect(() => {
+    if (lightboxOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightboxOpen]);
 
   return (
     <section id={anchorId} className="relative py-24 z-10 bg-white border-t border-zinc-100">
@@ -112,14 +164,19 @@ function CarouselSection({ label, anchorId, items }: CarouselSectionProps) {
             {/* Left card – hidden on mobile */}
             <div
               key={`left-${leftIndex}`}
-              className="hover-lift animate-card-swap hidden md:block md:w-[31%] max-w-[433px] bg-[#F7F5F0] rounded-2xl overflow-hidden border border-zinc-200/50 shadow-md"
+              onClick={() => openLightbox(leftIndex)}
+              className={`hover-lift animate-card-slide hidden md:block md:w-[31%] max-w-[433px] overflow-hidden shadow-md cursor-pointer ${
+                noFrame ? "rounded-[24px]" : "bg-white rounded-[32px] p-3 pb-8 border border-zinc-200/50"
+              }`}
             >
-              <div className="relative w-full aspect-[433/303]">
+              <div className={`relative w-full aspect-[433/303] overflow-hidden ${noFrame ? "rounded-[24px]" : "rounded-[24px]"}`}>
                 <Image
                   src={items[leftIndex].src}
                   alt={items[leftIndex].alt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 433px"
+                  unoptimized
+                  quality={100}
+                  sizes="(max-width: 1280px) 33vw, 433px"
                   className="object-cover"
                 />
               </div>
@@ -128,14 +185,21 @@ function CarouselSection({ label, anchorId, items }: CarouselSectionProps) {
             {/* Middle / featured card */}
             <div
               key={`middle-${middleIndex}`}
-              className="hover-lift animate-card-swap w-full md:w-[38%] max-w-[559px] bg-[#FAF8F5] rounded-2xl overflow-hidden border-2 border-brand-orange shadow-lg scale-100 md:scale-105 z-10 transition-transform duration-300"
+              onClick={() => openLightbox(middleIndex)}
+              className={`hover-lift animate-card-slide w-full md:w-[38%] max-w-[559px] overflow-hidden shadow-xl scale-100 md:scale-105 z-10 transition-all duration-300 cursor-pointer ${
+                noFrame
+                  ? "rounded-[28px] border-2 border-brand-orange"
+                  : "bg-white rounded-[36px] p-4 pb-10 border-2 border-brand-orange"
+              }`}
             >
-              <div className="relative w-full aspect-[559/391]">
+              <div className={`relative w-full aspect-[559/391] overflow-hidden ${noFrame ? "rounded-[28px]" : "rounded-[28px]"}`}>
                 <Image
                   src={items[middleIndex].src}
                   alt={items[middleIndex].alt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 559px"
+                  unoptimized
+                  quality={100}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 40vw, 559px"
                   className="object-cover"
                 />
               </div>
@@ -144,14 +208,19 @@ function CarouselSection({ label, anchorId, items }: CarouselSectionProps) {
             {/* Right card – hidden on mobile */}
             <div
               key={`right-${rightIndex}`}
-              className="hover-lift animate-card-swap hidden md:block md:w-[31%] max-w-[435px] bg-[#F7F5F0] rounded-2xl overflow-hidden border border-zinc-200/50 shadow-md"
+              onClick={() => openLightbox(rightIndex)}
+              className={`hover-lift animate-card-slide hidden md:block md:w-[31%] max-w-[435px] overflow-hidden shadow-md cursor-pointer ${
+                noFrame ? "rounded-[24px]" : "bg-white rounded-[32px] p-3 pb-8 border border-zinc-200/50"
+              }`}
             >
-              <div className="relative w-full aspect-[435/305]">
+              <div className={`relative w-full aspect-[435/305] overflow-hidden ${noFrame ? "rounded-[24px]" : "rounded-[24px]"}`}>
                 <Image
                   src={items[rightIndex].src}
                   alt={items[rightIndex].alt}
                   fill
-                  sizes="(max-width: 768px) 100vw, 435px"
+                  unoptimized
+                  quality={100}
+                  sizes="(max-width: 1280px) 33vw, 435px"
                   className="object-cover"
                 />
               </div>
@@ -187,6 +256,74 @@ function CarouselSection({ label, anchorId, items }: CarouselSectionProps) {
         </div>
 
       </div>
+
+      {/* Lightbox Modal via React Portal */}
+      {lightboxOpen && mounted && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] bg-black/95 flex flex-col items-center justify-center backdrop-blur-md cursor-zoom-out"
+          onClick={closeLightbox}
+        >
+          {/* Close Button */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all duration-200 cursor-pointer z-[10000]"
+            aria-label="Close modal"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Slider Content Wrapper */}
+          <div
+            className="relative w-full max-w-[90vw] md:max-w-[80vw] h-[70vh] flex items-center justify-center"
+          >
+            {/* Left Lightbox Arrow */}
+            <button
+              onClick={handleLightboxPrev}
+              className="absolute left-2 md:-left-20 text-white bg-[#FF3F00]/90 hover:bg-[#FF3F00] p-4 rounded-full transition-all duration-300 cursor-pointer z-[10000] shadow-lg shadow-brand-orange/30"
+              aria-label="Previous image"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Main Full Resolution Image */}
+            <div className="relative w-full h-full flex items-center justify-center select-none">
+              <img
+                src={items[lightboxIndex].src}
+                alt={items[lightboxIndex].alt}
+                onClick={(e) => e.stopPropagation()}
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-card-slide cursor-default"
+              />
+            </div>
+
+            {/* Right Lightbox Arrow */}
+            <button
+              onClick={handleLightboxNext}
+              className="absolute right-2 md:-right-20 text-white bg-[#FF3F00]/90 hover:bg-[#FF3F00] p-4 rounded-full transition-all duration-300 cursor-pointer z-[10000] shadow-lg shadow-brand-orange/30"
+              aria-label="Next image"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Info Details */}
+          <div
+            className="mt-6 text-center text-white/95 px-6 select-none"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="text-xl font-medium tracking-wide">{items[lightboxIndex].alt}</p>
+            <p className="text-sm text-zinc-400 mt-2 font-mono">
+              {lightboxIndex + 1} / {items.length}
+            </p>
+          </div>
+        </div>,
+        document.body
+      )}
     </section>
   );
 }
@@ -205,31 +342,37 @@ export default function MockupCarousel() {
         label="Amazon KDP"
         anchorId="amazon-kdp"
         items={amazonKdpItems}
+        noFrame
       />
       <CarouselSection
         label="Book Covers"
         anchorId="book-covers"
         items={bookCoverItems}
+        noFrame
       />
       <CarouselSection
         label="Ebooks"
         anchorId="ebooks"
         items={ebookItems}
+        noFrame
       />
       <CarouselSection
         label="Flyers"
         anchorId="flyers"
         items={flyerItems}
+        noFrame
       />
       <CarouselSection
         label="Presentations"
         anchorId="presentations"
         items={pptItems}
+        noFrame
       />
       <CarouselSection
         label="Social Media Posts"
         anchorId="social-media"
         items={socialMediaItems}
+        noFrame
       />
     </>
   );
