@@ -3,44 +3,92 @@
 import { useState } from "react";
 import Image from "next/image";
 
-const portfolioItems = [
-  {
-    src: "/images/work/Rooha_Wahid_Logo_Design_3 1.png",
-    alt: "Brand Mockups Orange and Black Grid",
-  },
-  {
-    src: "/images/work/Rooha_Wahid_Logo_Design_4 1.png",
-    alt: "Brand Mockups Yellow Spek Grid",
-  },
-  {
-    src: "/images/work/Rooha_Wahid_Logo_Design_2 1.png",
-    alt: "Brand Mockups Dark Theme Grid",
-  },
+type PortfolioItem = { src: string; alt: string };
+
+// ─── Data ──────────────────────────────────────────────────────────────────────
+
+const brandIdentityItems: PortfolioItem[] = [
+  { src: "/images/work/Rooha_Wahid_Logo_Design_3 1.png", alt: "Brand Mockups Orange and Black Grid" },
+  { src: "/images/work/Rooha_Wahid_Logo_Design_4 1.png", alt: "Brand Mockups Yellow Spek Grid" },
+  { src: "/images/work/Rooha_Wahid_Logo_Design_2 1.png", alt: "Brand Mockups Dark Theme Grid" },
 ];
 
-export default function MockupCarousel() {
-  const [activeIndex, setActiveIndex] = useState(1);
+const amazonKdpItems: PortfolioItem[] = [
+  { src: "/images/work/amazon-kdp/AiCaseForChrist.jpg", alt: "AI Case for Christ KDP Cover" },
+  { src: "/images/work/amazon-kdp/AiGuide.jpg", alt: "AI Guide KDP Cover" },
+  { src: "/images/work/amazon-kdp/GoodNews-Volume01.jpg", alt: "Good News Volume 01 KDP Cover" },
+  { src: "/images/work/amazon-kdp/GoodNews-Volume02.jpg", alt: "Good News Volume 02 KDP Cover" },
+  { src: "/images/work/amazon-kdp/Thoughts.jpg", alt: "Thoughts KDP Cover" },
+];
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + portfolioItems.length) % portfolioItems.length);
-  };
+const bookCoverItems: PortfolioItem[] = [
+  { src: "/images/work/book-covers/Ai-Confirms.jpg", alt: "AI Confirms Book Cover" },
+  { src: "/images/work/book-covers/GoodNews.png", alt: "Good News Book Cover" },
+  { src: "/images/work/book-covers/Heavenly.png", alt: "Heavenly Book Cover" },
+  { src: "/images/work/book-covers/InsaneJourney.jpg", alt: "Insane Journey Book Cover" },
+  { src: "/images/work/book-covers/PeterThiel.png", alt: "Peter Thiel Book Cover" },
+];
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % portfolioItems.length);
-  };
+const ebookItems: PortfolioItem[] = [
+  { src: "/images/work/ebooks/Backpack Essentials Checklist.jpg", alt: "Backpack Essentials Checklist Ebook" },
+  { src: "/images/work/ebooks/HOME SELLER CONSULTATION.jpg", alt: "Home Seller Consultation Ebook" },
+  { src: "/images/work/ebooks/InfiniteSales.jpg", alt: "Infinite Sales Ebook" },
+  { src: "/images/work/ebooks/Sleep Mistakes Lead Magnet.jpg", alt: "Sleep Mistakes Lead Magnet Ebook" },
+  { src: "/images/work/ebooks/Workbook Rethinking the Employee.jpg", alt: "Rethinking the Employee Workbook" },
+];
 
-  const leftIndex = (activeIndex - 1 + portfolioItems.length) % portfolioItems.length;
+const flyerItems: PortfolioItem[] = [
+  { src: "/images/work/flyers/Rooha_Wahid_Flyer_Design_1.jpg", alt: "Flyer Design 1" },
+  { src: "/images/work/flyers/Rooha_Wahid_Flyer_Design_2.jpg", alt: "Flyer Design 2" },
+  { src: "/images/work/flyers/Rooha_Wahid_Flyer_Design_3.jpg", alt: "Flyer Design 3" },
+  { src: "/images/work/flyers/Rooha_Wahid_Flyer_Design_4.jpg", alt: "Flyer Design 4" },
+  { src: "/images/work/flyers/Rooha_Wahid_Flyer_Design_5.jpg", alt: "Flyer Design 5" },
+];
+
+const pptItems: PortfolioItem[] = [
+  { src: "/images/work/ppts/Clozure.jpg", alt: "Clozure Presentation" },
+  { src: "/images/work/ppts/Devon.jpg", alt: "Devon Presentation" },
+  { src: "/images/work/ppts/HubbleCore copy.jpg", alt: "HubbleCore Presentation" },
+  { src: "/images/work/ppts/Maverick.jpg", alt: "Maverick Presentation" },
+  { src: "/images/work/ppts/PrepMeal.jpg", alt: "PrepMeal Presentation" },
+];
+
+const socialMediaItems: PortfolioItem[] = [
+  { src: "/images/work/social-media/14.jpg", alt: "Social Media Post 1" },
+  { src: "/images/work/social-media/15.jpg", alt: "Social Media Post 2" },
+  { src: "/images/work/social-media/16.jpg", alt: "Social Media Post 3" },
+  { src: "/images/work/social-media/17.jpg", alt: "Social Media Post 4" },
+  { src: "/images/work/social-media/18.jpg", alt: "Social Media Post 5" },
+];
+
+// ─── Carousel Component ────────────────────────────────────────────────────────
+
+interface CarouselSectionProps {
+  label: string;
+  anchorId: string;
+  items: PortfolioItem[];
+}
+
+function CarouselSection({ label, anchorId, items }: CarouselSectionProps) {
+  const [activeIndex, setActiveIndex] = useState(Math.min(1, items.length - 1));
+
+  const handlePrev = () =>
+    setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
+  const handleNext = () =>
+    setActiveIndex((prev) => (prev + 1) % items.length);
+
+  const leftIndex = (activeIndex - 1 + items.length) % items.length;
   const middleIndex = activeIndex;
-  const rightIndex = (activeIndex + 1) % portfolioItems.length;
+  const rightIndex = (activeIndex + 1) % items.length;
 
   return (
-    <section id="brand-identity" className="relative py-24 z-10 bg-white">
+    <section id={anchorId} className="relative py-24 z-10 bg-white border-t border-zinc-100">
       <div className="mx-auto w-full max-w-[1440px] px-6 sm:px-10 lg:px-[86px] xl:max-w-none flex flex-col items-start gap-12">
 
         {/* Header Badge */}
         <div className="w-full flex justify-between items-center">
           <span className="inline-flex items-center justify-center rounded-[27.4px] bg-[#FF3F00] px-[18.2px] py-[6px] text-[15.9px] font-bold uppercase tracking-[0.13em] leading-[1.5] text-white shadow-sm shadow-brand-orange/20">
-            Brand Identity
+            {label}
           </span>
         </div>
 
@@ -59,14 +107,17 @@ export default function MockupCarousel() {
           </button>
 
           {/* Mockup Showcase Cards */}
-          <div className="w-full flex items-center justify-center gap-6 lg:gap-8 perspective-container">
+          <div className="w-full flex items-center justify-center gap-6 lg:gap-8">
 
-            {/* Logo Design 3 (Left Mockup - hidden on mobile) */}
-            <div key={`left-${leftIndex}`} className="hover-lift animate-card-swap hidden md:block md:w-[31%] max-w-[433px] bg-[#F7F5F0] rounded-2xl overflow-hidden border border-zinc-200/50 shadow-md">
+            {/* Left card – hidden on mobile */}
+            <div
+              key={`left-${leftIndex}`}
+              className="hover-lift animate-card-swap hidden md:block md:w-[31%] max-w-[433px] bg-[#F7F5F0] rounded-2xl overflow-hidden border border-zinc-200/50 shadow-md"
+            >
               <div className="relative w-full aspect-[433/303]">
                 <Image
-                  src={portfolioItems[leftIndex].src}
-                  alt={portfolioItems[leftIndex].alt}
+                  src={items[leftIndex].src}
+                  alt={items[leftIndex].alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 433px"
                   className="object-cover"
@@ -74,12 +125,15 @@ export default function MockupCarousel() {
               </div>
             </div>
 
-            {/* Logo Design 4 (Middle / Taller Mockup) */}
-            <div key={`middle-${middleIndex}`} className="hover-lift animate-card-swap w-full md:w-[38%] max-w-[559px] bg-[#FAF8F5] rounded-2xl overflow-hidden border-2 border-brand-orange shadow-lg scale-100 md:scale-105 z-10 transition-transform duration-300">
+            {/* Middle / featured card */}
+            <div
+              key={`middle-${middleIndex}`}
+              className="hover-lift animate-card-swap w-full md:w-[38%] max-w-[559px] bg-[#FAF8F5] rounded-2xl overflow-hidden border-2 border-brand-orange shadow-lg scale-100 md:scale-105 z-10 transition-transform duration-300"
+            >
               <div className="relative w-full aspect-[559/391]">
                 <Image
-                  src={portfolioItems[middleIndex].src}
-                  alt={portfolioItems[middleIndex].alt}
+                  src={items[middleIndex].src}
+                  alt={items[middleIndex].alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 559px"
                   className="object-cover"
@@ -87,12 +141,15 @@ export default function MockupCarousel() {
               </div>
             </div>
 
-            {/* Logo Design 2 (Right Mockup - hidden on mobile) */}
-            <div key={`right-${rightIndex}`} className="hover-lift animate-card-swap hidden md:block md:w-[31%] max-w-[435px] bg-[#F7F5F0] rounded-2xl overflow-hidden border border-zinc-200/50 shadow-md">
+            {/* Right card – hidden on mobile */}
+            <div
+              key={`right-${rightIndex}`}
+              className="hover-lift animate-card-swap hidden md:block md:w-[31%] max-w-[435px] bg-[#F7F5F0] rounded-2xl overflow-hidden border border-zinc-200/50 shadow-md"
+            >
               <div className="relative w-full aspect-[435/305]">
                 <Image
-                  src={portfolioItems[rightIndex].src}
-                  alt={portfolioItems[rightIndex].alt}
+                  src={items[rightIndex].src}
+                  alt={items[rightIndex].alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 435px"
                   className="object-cover"
@@ -115,9 +172,9 @@ export default function MockupCarousel() {
 
         </div>
 
-        {/* Mobile indicators */}
+        {/* Mobile dot indicators */}
         <div className="w-full flex md:hidden justify-center items-center gap-2 mt-4">
-          {portfolioItems.map((_, index) => (
+          {items.map((_, index) => (
             <button
               key={index}
               onClick={() => setActiveIndex(index)}
@@ -131,5 +188,49 @@ export default function MockupCarousel() {
 
       </div>
     </section>
+  );
+}
+
+// ─── Page Export ───────────────────────────────────────────────────────────────
+
+export default function MockupCarousel() {
+  return (
+    <>
+      <CarouselSection
+        label="Brand Identity"
+        anchorId="brand-identity"
+        items={brandIdentityItems}
+      />
+      <CarouselSection
+        label="Amazon KDP"
+        anchorId="amazon-kdp"
+        items={amazonKdpItems}
+      />
+      <CarouselSection
+        label="Book Covers"
+        anchorId="book-covers"
+        items={bookCoverItems}
+      />
+      <CarouselSection
+        label="Ebooks"
+        anchorId="ebooks"
+        items={ebookItems}
+      />
+      <CarouselSection
+        label="Flyers"
+        anchorId="flyers"
+        items={flyerItems}
+      />
+      <CarouselSection
+        label="Presentations"
+        anchorId="presentations"
+        items={pptItems}
+      />
+      <CarouselSection
+        label="Social Media Posts"
+        anchorId="social-media"
+        items={socialMediaItems}
+      />
+    </>
   );
 }
