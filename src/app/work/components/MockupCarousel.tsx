@@ -165,17 +165,15 @@ function CarouselSection({ label, anchorId, items, noFrame = false }: CarouselSe
             <div
               key={`left-${leftIndex}`}
               onClick={() => openLightbox(leftIndex)}
-              className={`hover-lift animate-card-slide hidden md:block md:w-[31%] max-w-[433px] overflow-hidden shadow-md cursor-pointer ${
-                noFrame ? "rounded-[24px]" : "bg-white rounded-[32px] p-3 pb-8 border border-zinc-200/50"
-              }`}
+              className={`hover-lift animate-card-slide hidden md:block md:w-[31%] max-w-[433px] overflow-hidden shadow-md cursor-zoom-in ${noFrame ? "rounded-[24px]" : "bg-white rounded-[32px] p-3 pb-8 border border-zinc-200/50"
+                }`}
             >
               <div className={`relative w-full aspect-[433/303] overflow-hidden ${noFrame ? "rounded-[24px]" : "rounded-[24px]"}`}>
                 <Image
                   src={items[leftIndex].src}
                   alt={items[leftIndex].alt}
                   fill
-                  unoptimized
-                  quality={100}
+                  quality={75}
                   sizes="(max-width: 1280px) 33vw, 433px"
                   className="object-cover"
                 />
@@ -186,19 +184,17 @@ function CarouselSection({ label, anchorId, items, noFrame = false }: CarouselSe
             <div
               key={`middle-${middleIndex}`}
               onClick={() => openLightbox(middleIndex)}
-              className={`hover-lift animate-card-slide w-full md:w-[38%] max-w-[559px] overflow-hidden shadow-xl scale-100 md:scale-105 z-10 transition-all duration-300 cursor-pointer ${
-                noFrame
+              className={`hover-lift animate-card-slide w-full md:w-[38%] max-w-[559px] overflow-hidden shadow-xl scale-100 md:scale-105 z-10 transition-all duration-300 cursor-zoom-in ${noFrame
                   ? "rounded-[28px] border-2 border-brand-orange"
                   : "bg-white rounded-[36px] p-4 pb-10 border-2 border-brand-orange"
-              }`}
+                }`}
             >
               <div className={`relative w-full aspect-[559/391] overflow-hidden ${noFrame ? "rounded-[28px]" : "rounded-[28px]"}`}>
                 <Image
                   src={items[middleIndex].src}
                   alt={items[middleIndex].alt}
                   fill
-                  unoptimized
-                  quality={100}
+                  quality={75}
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 40vw, 559px"
                   className="object-cover"
                 />
@@ -209,17 +205,15 @@ function CarouselSection({ label, anchorId, items, noFrame = false }: CarouselSe
             <div
               key={`right-${rightIndex}`}
               onClick={() => openLightbox(rightIndex)}
-              className={`hover-lift animate-card-slide hidden md:block md:w-[31%] max-w-[435px] overflow-hidden shadow-md cursor-pointer ${
-                noFrame ? "rounded-[24px]" : "bg-white rounded-[32px] p-3 pb-8 border border-zinc-200/50"
-              }`}
+              className={`hover-lift animate-card-slide hidden md:block md:w-[31%] max-w-[435px] overflow-hidden shadow-md cursor-zoom-in ${noFrame ? "rounded-[24px]" : "bg-white rounded-[32px] p-3 pb-8 border border-zinc-200/50"
+                }`}
             >
               <div className={`relative w-full aspect-[435/305] overflow-hidden ${noFrame ? "rounded-[24px]" : "rounded-[24px]"}`}>
                 <Image
                   src={items[rightIndex].src}
                   alt={items[rightIndex].alt}
                   fill
-                  unoptimized
-                  quality={100}
+                  quality={75}
                   sizes="(max-width: 1280px) 33vw, 435px"
                   className="object-cover"
                 />
@@ -248,9 +242,8 @@ function CarouselSection({ label, anchorId, items, noFrame = false }: CarouselSe
               key={index}
               onClick={() => setActiveIndex(index)}
               aria-label={`Go to slide ${index + 1}`}
-              className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                activeIndex === index ? "bg-[#FF3F00] w-4" : "bg-zinc-300 hover:bg-zinc-400"
-              }`}
+              className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index ? "bg-[#FF3F00] w-4" : "bg-zinc-300 hover:bg-zinc-400"
+                }`}
             />
           ))}
         </div>
