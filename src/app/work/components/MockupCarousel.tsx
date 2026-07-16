@@ -138,7 +138,7 @@ function CarouselSection({ label, anchorId, items, noFrame = false }: CarouselSe
       <div className="mx-auto w-full max-w-[1440px] px-6 sm:px-10 lg:px-[86px] xl:max-w-none flex flex-col items-start gap-12">
 
         {/* Header Badge */}
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-center items-center">
           <span className="inline-flex items-center justify-center rounded-[27.4px] bg-[#FF3F00] px-[18.2px] py-[6px] text-[15.9px] font-bold uppercase tracking-[0.13em] leading-[1.5] text-white shadow-sm shadow-brand-orange/20">
             {label}
           </span>
