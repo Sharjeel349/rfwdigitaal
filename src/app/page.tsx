@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ServiceSection from "@/components/ServiceSection";
-import CultureSection from "@/components/CultureSection";
 import QuoteSection from "@/components/QuoteSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -12,7 +11,6 @@ import {
   NAV_LINKS,
   HERO_CONTENT,
   SERVICES_CONTENT,
-  CULTURE_CONTENT,
   QUOTE_CONTENT,
   PORTFOLIO_CONTENT,
 } from "@/data/content";
@@ -30,7 +28,6 @@ export default function Home() {
           introDescription={PORTFOLIO_CONTENT.sectionDescription}
         />
         <PortfolioSection items={PORTFOLIO_CONTENT.items} />
-        <CultureSection content={CULTURE_CONTENT} />
         <TestimonialsSection />
         <ProjectDiscussionSection />
       </main>

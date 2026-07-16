@@ -23,51 +23,16 @@ export default function Navbar({ links }: NavbarProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      if (pathname === "/" && window.scrollY < 100) {
-        setActiveSection("");
-      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
-  useEffect(() => {
-    if (pathname !== "/") {
-      setActiveSection("");
-      return;
-    }
 
-    const sections = ["culture"];
-    const observers = sections.map((id) => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(id);
-            }
-          });
-        },
-        { threshold: 0.3, rootMargin: "-10% 0px -40% 0px" }
-      );
-
-      observer.observe(el);
-      return { observer, el };
-    });
-
-    return () => {
-      observers.forEach((obs) => {
-        if (obs) obs.observer.unobserve(obs.el);
-      });
-    };
-  }, [pathname]);
 
   return (
     <header
@@ -93,10 +58,7 @@ export default function Navbar({ links }: NavbarProps) {
               (pathname === "/work" && link.label === "WORK") ||
               (pathname === "/services" && link.label === "SERVICES") ||
               (pathname === "/contact" && link.label === "CONTACT") ||
-              (pathname === "/" && (
-                (activeSection === "culture" && link.label === "CULTURE") ||
-                (activeSection === "" && link.label === "HOME")
-              ));
+              (pathname === "/" && link.label === "HOME");
 
             if (link.label === "WORK") {
               return (
@@ -104,13 +66,17 @@ export default function Navbar({ links }: NavbarProps) {
                   <Link
                     href={link.href}
                     className={`font-sans text-[14px] ${
-                      isActive ? "font-black text-brand-orange" : "font-bold text-black hover:text-brand-orange"
+                      isActive
+                        ? "font-black text-brand-orange"
+                        : "font-bold text-black hover:text-brand-orange"
                     } tracking-[0.13em] uppercase transition-colors`}
                   >
                     {link.label}
                   </Link>
+                  {/* Invisible hover bridge — fills the gap so mouse doesn't lose group-hover */}
+                  <div className="absolute top-full left-0 w-full h-3" />
                   {/* Dropdown Menu */}
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-56 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50">
                     <div className="bg-white/95 backdrop-blur-md border border-[#E5DCD3]/50 rounded-2xl shadow-xl py-3 px-1 flex flex-col gap-1">
                       {workCategories.map((cat) => (
                         <Link
@@ -132,7 +98,9 @@ export default function Navbar({ links }: NavbarProps) {
                 key={link.label}
                 href={link.href}
                 className={`font-sans text-[14px] ${
-                  isActive ? "font-black text-brand-orange" : "font-bold text-black hover:text-brand-orange"
+                  isActive
+                    ? "font-black text-brand-orange"
+                    : "font-bold text-black hover:text-brand-orange"
                 } tracking-[0.13em] uppercase transition-colors`}
               >
                 {link.label}
@@ -202,10 +170,7 @@ export default function Navbar({ links }: NavbarProps) {
               (pathname === "/work" && link.label === "WORK") ||
               (pathname === "/services" && link.label === "SERVICES") ||
               (pathname === "/contact" && link.label === "CONTACT") ||
-              (pathname === "/" && (
-                (activeSection === "culture" && link.label === "CULTURE") ||
-                (activeSection === "" && link.label === "HOME")
-              ));
+              (pathname === "/" && link.label === "HOME");
 
             const isWork = link.label === "WORK";
 
@@ -215,7 +180,9 @@ export default function Navbar({ links }: NavbarProps) {
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   className={`font-display font-semibold text-lg tracking-widest transition-colors ${
-                    isActive ? "text-brand-orange font-black" : "text-charcoal hover:text-brand-orange font-bold"
+                    isActive
+                      ? "text-brand-orange font-black"
+                      : "text-charcoal hover:text-brand-orange font-bold"
                   }`}
                 >
                   {link.label}
